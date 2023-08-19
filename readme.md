@@ -1,5 +1,4 @@
 1. class Resource
-    Resource
 2. class ResourceManager
     1. Initially std::vector<Resource::Ptr> resource_table: Implement this for now
     2. Then std::vector<List<Resource>>     resource_table: Vector of linkedlist (bucket) serving as a hashmap
