@@ -24,7 +24,7 @@ endif()
 # add_executable/add_library for my app or library
 add_executable(test_runner 
     resource_manager_test.cpp
-    resource_test.cpp
+    device_test.cpp
     main.cpp
 )
 
