@@ -1,22 +1,34 @@
-#include "device.hpp"
+#include "file.hpp"
 #include <gtest/gtest.h>
 #include <iostream>
 #include <memory>
 
-class DeviceTest : public ::testing::Test {};
+class FileTest : public ::testing::Test {};
 
 using namespace filesystem;
-TEST_F(DeviceTest, get_index_ShallReturnCorrectIndex) {
+
+TEST_F(FileTest, get_index_ShallReturnCorrectIndex) {
   std::uint32_t fst_ind{0};
   std::uint32_t snd_ind{1};
-  Resource::Ptr fst_resource = std::make_shared<Device>(fst_ind);
-  Resource::Ptr snd_resource = std::make_shared<Device>(snd_ind);
+  IFile::Ptr fst_file = std::make_shared<File>(fst_ind);
+  IFile::Ptr snd_file = std::make_shared<File>(snd_ind);
 
-  ASSERT_EQ(fst_resource->get_index(), fst_ind);
-  ASSERT_EQ(snd_resource->get_index(), snd_ind);
+  ASSERT_EQ(fst_file->get_file_id(), fst_ind);
+  ASSERT_EQ(snd_file->get_file_id(), snd_ind);
 }
 
-// TEST_F(ResourceTest, get_resource_count_ShallReturnCorrectResourceCount) {
+TEST_F(FileTest, write_WhenUsingPipes) {
+  std::uint32_t fst_ind{0};
+  std::uint32_t snd_ind{1};
+  const std::vector<std::uint8_t> data{0x01, 0x02, 0x03};
+
+  IFile::Ptr fst_file = std::make_shared<File>(fst_ind);
+
+  fst_file->write(data);
+  ASSERT_EQ(data, fst_file->read(data.size()));
+}
+
+// TEST_F(FileTest, get_resource_count_ShallReturnCorrectResourceCount) {
 //   Resource fst_resource{};
 //   ASSERT_EQ(Resource::get_resource_count(), 1);
 

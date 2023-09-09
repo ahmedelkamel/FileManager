@@ -23,10 +23,10 @@ endif()
 
 # add_executable/add_library for my app or library
 add_executable(test_runner 
-    resource_manager_test.cpp
-    device_test.cpp
+    file_manager_test.cpp
+    file_test.cpp
     main.cpp
 )
 
 # target_link_libraries to link my app/library to gtest
-target_link_libraries(test_runner PRIVATE gtest_main gmock_main resource_manager)
+target_link_libraries(test_runner PRIVATE gtest_main gmock_main file_manager)

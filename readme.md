@@ -5,18 +5,18 @@
    The svg url is obtained from Using the following plantuml code in ![Plantuml](http://www.plantuml.com/plantuml/uml/).
 
    @startuml
-   https://github.com/ahmedelkamel/ResourceManager/blob/master/design/class_diagram.plantuml
+   https://github.com/ahmedelkamel/FileManager/blob/master/design/class_diagram.plantuml
    @enduml
 
    The .svg extension is added manually.
-3. class Resource
-4. class ResourceManager
-    1. Initially std::vector<Resource::Ptr> resource_table: Implement this for now
-    2. Then std::vector<List<Resource>>     resource_table: Vector of linkedlist (bucket) serving as a hashmap
+3. class File
+4. class FileManager
+    1. Initially std::vector<IFile::Ptr> m_files: Implement this for now
+    2. Then std::vector<List<IFile>> m_files: Vector of linkedlist (bucket) serving as a hashmap
 5. Interaction
-    - Application requests resource #i from ResourceManager
-    - RM creates a resource if it is not allocated.
-    - RM returns a shared pointer to the resource.
-    - Once no pointers reference the Resource, it is released
+    - Application requests file #i from FileManager
+    - RM creates a file if it is not allocated.
+    - RM returns a shared pointer to the file.
+    - Once no pointers reference the File, it is released
         Test: shared_ptr<T>::use_count() is zero
-    - Resource::~Resource() the destructor releases the resource
+    - File::~File() the destructor releases the file

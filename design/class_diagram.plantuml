@@ -1,56 +1,33 @@
 @startuml
 
-Resource <|-- Device
-ResourceManager "1" *-- "many" Resource : contains
+IFile <|-- File
+FileManager "1" *-- "many" IFile : contains
 
-' Connect the output of one resource to the input of another
-' Similar to Pipe in Linux
-' Pipe is based on mediator design pattern
-IPipe <|-- Pipe
-IPipe "1" --[Dashed]--> "1" Resource
-
-class ResourceManager{
-    -map<uint32_t, Resource::Ptr> m_resources
-    +get_resource(uint32_t index) : Resource::Ptr
+class FileManager{
+    -map<uint32_t, IFile::Ptr> m_files
+    +get_file(uint32_t file_id) : IFile::Ptr
 }
 
-interface Resource {
-    +get_dev_index() : uint32_t
-    +set_pipe(IPipe::Ptr pipe) : void 
-    +read(uint32_t data_size) : vector<uint8_t> data
-    +write(vector<uint8_t>& data) : bool
+interface IFile {
+    +get_file_id() : uint32_t
+    +read(const uint32_t data_size) : vector<uint8_t>
+    +write(const vector<uint8_t>& data) : bool
 }
 
-class Device {
-    -uint32_t m_dev_index
-    -IPipe::Ptr m_pipe
-    -vector<uint8_t> m_in_buffer
-    -vector<uint8_t> m_out_data
+class File {
+    -uint32_t m_file_id
+    -vector<uint8_t> m_buffer
     -uint32_t m_max_size
-    +Device(uint32_t dev_index)
-    +get_dev_index() override: uint32_t
-    +set_pipe(IPipe::Ptr pipe) override : void 
-    +read(uint32_t data_size) override : vector<uint8_t> data
+    +File(const uint32_t file_id)
+    +get_file_id() override: uint32_t
+    +read(const uint32_t data_size) override : vector<uint8_t>
+    '   data = /* read from m_in_buffer */
     ' Log read data
-    '   read from m_in_buffer
-    +write(vector<uint8_t>& data) override : bool
+    ' return data
+    +write(const vector<uint8_t>& data) override : bool
     ' Log written data
-    ' if(m_pipe)
-    '   m_pipe->write(data)
-    ' else
-    '   write to m_out_buffer
+    '   rv = /* write to m_out_buffer */
+    ' return rv;
 }
 
-interface IPipe {
-    +write(vector<uint8_t>& data) : bool
-}
-
-class Pipe {
-    -Resource::Ptr src;
-    -Resource::Ptr dst;
-    +Pipe(Resource::Ptr src, Resource::Ptr dst)
-    ' src->set_pipe(this);
-    +write(vector<uint8_t>& data) override : bool
-    ' r2->write_data(data)
-}
 @enduml
