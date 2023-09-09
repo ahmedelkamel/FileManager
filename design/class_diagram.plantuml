@@ -2,6 +2,8 @@
 
 IFile <|-- File
 FileManager "1" *-- "many" IFile : contains
+FileManager <- Process : has
+Process "1" o-left- "many" IFile : contains
 
 class FileManager{
     -map<uint32_t, IFile::Ptr> m_files
@@ -28,6 +30,17 @@ class File {
     ' Log written data
     '   rv = /* write to m_out_buffer */
     ' return rv;
+}
+
+class Process {
+    -vector<IFile::Ptr> m_files
+    -uint32_t m_nr_files
+    -FileManager::Ptr m_file_manager
+    +Process(const FileManager::Ptr file_manager)
+    +open_file(uint32_t file_id) : bool
+    ' auto file = m_file_manager->get_file(file_id)
+    ' m_files[m_nr_files++] = file
+    ' return true
 }
 
 @enduml
