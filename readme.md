@@ -1,14 +1,16 @@
 1. Current design
 
-   ![Plant UML](http://www.plantuml.com/plantuml/svg/1S7R3O8X30RGLNG1-kuElhY0gV05Y6tvqqjSttFksxhKGBdSLkOL3oBdNvixLtqguFrOmhBreyHBCI1VLWYz4AUyuyd64qxAaN0QY3sDkd34UsoUpjekOSjI-GC0.svg)
+   ![Plant UML](http://www.plantuml.com/plantuml/png/7Ssn3G8n30NGdYbWWRYdkegE6T0diP88stUo7R4-9wfNlYqIdalbSfjMPJM-ZimZxaIER-apntglOA-x9LkMkYjXA3UM3vI57bFu2KDd9qNaIUEOtQWA8bvjeZkq70BxHnjRE_q1.svg)
 
    The svg url is obtained from Using the following plantuml code in ![Plantuml](http://www.plantuml.com/plantuml/uml/).
 
    @startuml
-   https://github.com/ahmedelkamel/FileManager/blob/master/design/class_diagram.plantuml
+   !include https://raw.githubusercontent.com/ahmedelkamel/FileManager/master/design/class_diagram.plantuml
    @enduml
 
-   The .svg extension is added manually.
+   Note:
+   - Make sure you have a url of the plantuml file in raw-format.
+   - The .svg extension is added manually.
 3. class File
 4. class FileManager
     1. Initially std::vector<IFile::Ptr> m_files: Implement this for now
