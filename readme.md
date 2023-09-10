@@ -1,6 +1,6 @@
 1. Current design
 
-   ![Plant UML](http://www.plantuml.com/plantuml/svg/1S7R3O8X30RGLNG1-kuElhY0gV05Y6tvqqjSttFksxhKGBdSLkOL3oBdNvixLtqguFrOmhBreyHBCI1VLWYz4AUyuyd64qxAaN0QY3sDkd34UsoUpjekOSjI-GC0.svg)
+   ![Plant UML]()
 
    The svg url is obtained from Using the following plantuml code in ![Plantuml](http://www.plantuml.com/plantuml/uml/).
 
